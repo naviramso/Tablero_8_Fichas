@@ -123,9 +123,6 @@ public class Tablero {
         System.out.println("******");
         for( Tablero t :  tab.getHijos()){
             System.out.println(t.toString());
-        }
-
-       
-        
+        } 
     }
 }
