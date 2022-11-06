@@ -12,15 +12,15 @@ public class Tablero {
 
     public Tablero(){
        this.tabla = new char[3][3];
-       tabla[0][0] = '1';
-       tabla[0][1] = '2';
+       tabla[0][0] = '2';
+       tabla[0][1] = '5';
        tabla[0][2] = '6';
        tabla[1][0] = '3';
-       tabla[1][1] = 'x';
+       tabla[1][1] = '1';
        tabla[1][2] = '4';
        tabla[2][0] = '7';
        tabla[2][1] = '8';
-       tabla[2][2] = '5';
+       tabla[2][2] = 'x';
     }
 
     public Tablero(char[][] cs){
@@ -30,41 +30,51 @@ public class Tablero {
     public ArrayList<Tablero> getHijos(){
         int [] vacio = getVacio();
         ArrayList<Tablero> hijos = new ArrayList<>();
-        if(vacio[1] -1 > 0){
-            char [][] tableroCopia = tabla.clone();
-            char aux = tableroCopia[vacio[0]][vacio[1]-1];
-            tableroCopia[vacio[0]][(vacio[1])] = aux;
-            tableroCopia[vacio[0]][vacio[1]-1] = 'x';
-            hijos.add(new Tablero(tableroCopia));
+        if(vacio[1]  > 0){
+            char [][] tableroCopia1 = clonar();
+            char aux = tableroCopia1[vacio[0]][vacio[1]-1];
+            tableroCopia1[vacio[0]][(vacio[1])] = aux;
+            tableroCopia1[vacio[0]][vacio[1]-1] = 'x';
+            hijos.add(new Tablero(tableroCopia1));
         } 
 
-        if(vacio[1] +1 < 3){
-            char [][] tableroCopia = tabla.clone();
-            char aux = tableroCopia[vacio[0]][vacio[1]+1];
-            tableroCopia[vacio[0]][(vacio[1])] = aux;
-            tableroCopia[vacio[0]][vacio[1]+1] = 'x';
-            hijos.add(new Tablero(tableroCopia));
+        if(vacio[1] < 2){
+            char [][] tableroCopia2 = clonar();
+            char aux = tableroCopia2[vacio[0]][vacio[1]+1];
+            tableroCopia2[vacio[0]][(vacio[1])] = aux;
+            tableroCopia2[vacio[0]][vacio[1]+1] = 'x';
+            hijos.add(new Tablero(tableroCopia2));
         }
 
-        if(vacio[0] -1 > 0){
-            char [][] tableroCopia = tabla.clone();
-            char aux = tableroCopia[vacio[0]-1][vacio[1]];
-            tableroCopia[vacio[0]][(vacio[1])] = aux;
-            tableroCopia[vacio[0]-1][vacio[1]] = 'x';
-            hijos.add(new Tablero(tableroCopia));
+        if(vacio[0] > 0){
+            char [][] tableroCopia3 = clonar();
+            char aux = tableroCopia3[vacio[0]-1][vacio[1]];
+            tableroCopia3[vacio[0]][(vacio[1])] = aux;
+            tableroCopia3[vacio[0]-1][vacio[1]] = 'x';
+            hijos.add(new Tablero(tableroCopia3));
         }
 
-        if(vacio[0]+1 < 3){
-            char [][] tableroCopia = tabla.clone();
-            char aux = tableroCopia[vacio[0]+1][vacio[1]];
-            tableroCopia[vacio[0]][(vacio[1])] = aux;
-            tableroCopia[vacio[0]+1][vacio[1]] = 'x';
-            hijos.add(new Tablero(tableroCopia));
+        if(vacio[0] < 2){
+            char [][] tableroCopia4 = clonar();
+            char aux = tableroCopia4[vacio[0]+1][vacio[1]];
+            tableroCopia4[vacio[0]][(vacio[1])] = aux;
+            tableroCopia4[vacio[0]+1][vacio[1]] = 'x';
+            hijos.add(new Tablero(tableroCopia4));
         }
         return hijos;
     }
 
-    private int[] getVacio(){
+    public char[][] clonar(){
+        char [][] clon = new char[3][3];
+        for(int i = 0; i< this.tabla.length; i++){
+            for(int j = 0 ; j< this.tabla[i].length ; j++){
+                clon[i][j] = this.tabla[i][j];
+            }
+        }
+        return clon;
+    }
+
+    public int[] getVacio(){
         int [] indice = new int[2];
         for(int i = 0; i < this.tabla.length ; i++){
             for(int j = 0; j < this.tabla[i].length; j++){
