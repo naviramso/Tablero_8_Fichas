@@ -9,6 +9,5 @@ public class Main {
         System.out.println("--------");
         Juego juego = new Juego(tablero);
         System.out.print(juego.buscar().toString());
-    
     }
 }
